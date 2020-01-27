@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UsuarioModel } from '../../models/usuario.model';
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -7,17 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuariosComponent implements OnInit {
 
-  users = [];
+  users: UsuarioModel[] = [];
 
-  constructor() { }
+  constructor( private userService: UsuariosService) { }
 
   ngOnInit() {
-    this.users = [
-      { name: 'nombre',
-        ocupation: 'web ui dev',
-        employed: true
-      }
-    ];
+    this.userService.getUsuarios().subscribe( users => {
+      this.users = users;
+      console.log('usuarios:', this.users);
+    });
   }
 
 }

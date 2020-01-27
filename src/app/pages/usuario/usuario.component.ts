@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
     selector: 'app-usuario',
@@ -11,8 +12,9 @@ export class UsuarioComponent {
 
     dataForm: FormGroup;
 
-    constructor() {
+    constructor( private userService: UsuariosService ) {
 
+        // Form data
         this.dataForm = new FormGroup({
             id: new FormControl(''),
             name: new FormControl('', Validators.required),
@@ -24,5 +26,9 @@ export class UsuarioComponent {
     saveForm() {
         console.log(this.dataForm);
         console.log(this.dataForm.value);
+
+        this.userService.createUser(this.dataForm.value).subscribe( resp => {
+            console.log(resp);
+        });
     }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Routes
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +10,7 @@ import { AppComponent } from './app.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { StatusComponent } from './components/status/status.component';
+import { UsuariosService } from './services/usuarios.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import { StatusComponent } from './components/status/status.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UsuariosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
