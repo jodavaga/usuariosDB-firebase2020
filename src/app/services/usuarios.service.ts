@@ -19,7 +19,7 @@ export class UsuariosService {
 
   getUsuarios(): Observable<UsuarioModel[]> {
     return this.http.get(`${ this.url }/usuarios.json`).pipe(
-      map((users: UsuarioModel[]) => users)
+      map((users: any) => this.convertToArray(users))
     );
   }
 
@@ -43,5 +43,20 @@ export class UsuariosService {
     delete userTemp.id;
 
     return this.http.put(`${this.url}/usuarios/${user.id}.json`, userTemp);
+  }
+
+  private convertToArray( usuariosObj: object) {
+
+    const usuarios: UsuarioModel[] = [];
+
+    // Every object is switched to an array item
+    Object.keys(usuariosObj).forEach( key => {
+      const usuario: UsuarioModel = usuariosObj[key];
+      // id field is filled with the generated firebase ID
+      usuario.id = key;
+      usuarios.push(usuario);
+    });
+
+    return usuarios;
   }
 }
