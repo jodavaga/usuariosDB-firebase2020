@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="row m-t-3">
+<div class="row m-t-3" *ngIf="users == null">
   <div class="col text-center">
     <div class="alert alert-warning" role="alert">
       <i class="fa fa-exclamation-triangle fa-2x"></i>
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div class="row m-t-3 animated fadeIn slow">
+<div class="row m-t-3 animated fadeIn slow" *ngIf="users != null">
     <table class="table">
         <thead class="thead-dark">
           <tr>

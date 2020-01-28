@@ -13,7 +13,6 @@ import { UsuarioModel } from '../models/usuario.model';
 export class UsuariosService {
 
   private url = 'https://usuariosdb-2020.firebaseio.com';
-  usuarios: UsuarioModel[] = [];
 
   constructor( private http: HttpClient ) {
   }
@@ -24,11 +23,25 @@ export class UsuariosService {
     );
   }
 
-  createUser( user: UsuarioModel) {
-    return this.http.post(`${this.url}/usuarios.json`, user);
+  createUser( user: UsuarioModel): Observable<UsuarioModel> {
+    return this.http.post(`${this.url}/usuarios.json`, user).pipe(
+      map( (resp: any) => {
+        user.id = resp.name;
+        console.log('ID:', user.id);
+        return user;
+      })
+    );
   }
 
   updateUser( user: UsuarioModel ) {
-    return this.http.put(`${this.url}.json`, user);
+
+    // No needed to created ID field on database after update
+    const userTemp = {
+      ...user
+    };
+
+    delete userTemp.id;
+
+    return this.http.put(`${this.url}/usuarios/${user.id}.json`, userTemp);
   }
 }

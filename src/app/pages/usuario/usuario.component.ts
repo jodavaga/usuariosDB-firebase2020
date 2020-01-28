@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UsuariosService } from '../../services/usuarios.service';
+import { UsuarioModel } from '../../models/usuario.model';
 
 @Component({
     selector: 'app-usuario',
@@ -11,24 +12,42 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class UsuarioComponent {
 
     dataForm: FormGroup;
+    usuario: UsuarioModel = new UsuarioModel();
 
     constructor( private userService: UsuariosService ) {
 
         // Form data
         this.dataForm = new FormGroup({
-            id: new FormControl(''),
+            id: new FormControl(),
             name: new FormControl('', Validators.required),
             ocupation: new FormControl('', Validators.required),
-            status: new FormControl(true, Validators.required)
+            employed: new FormControl(true, Validators.required)
         });
     }
 
     saveForm() {
-        console.log(this.dataForm);
-        console.log(this.dataForm.value);
+        if (this.dataForm.invalid) {
+            console.log('Forma NO valida');
+            return;
+        }
 
-        this.userService.createUser(this.dataForm.value).subscribe( resp => {
-            console.log(resp);
-        });
+        // User to save is equal to dataForm value (without ID)
+        this.usuario = {
+            // prevent using every field
+            ...this.dataForm.value
+        };
+
+        if (this.usuario.id) {
+            this.userService.updateUser(this.usuario).subscribe( resp => { 
+                console.log('Udated:', resp);
+            });
+
+        } else {
+            this.userService.createUser(this.usuario).subscribe( resp => {
+                this.dataForm.get('id').setValue(resp.id);
+                console.log('Created:', resp);
+            });
+        }
+
     }
 }
