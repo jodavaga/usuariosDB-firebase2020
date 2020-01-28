@@ -27,7 +27,6 @@ export class UsuariosService {
     return this.http.post(`${this.url}/usuarios.json`, user).pipe(
       map( (resp: any) => {
         user.id = resp.name;
-        console.log('ID:', user.id);
         return user;
       })
     );
@@ -47,7 +46,11 @@ export class UsuariosService {
 
   private convertToArray( usuariosObj: object) {
 
-    const usuarios: UsuarioModel[] = [];
+    let usuarios: UsuarioModel[] = [];
+
+    if ( usuariosObj === null ) {
+      return usuarios = [];
+    }
 
     // Every object is switched to an array item
     Object.keys(usuariosObj).forEach( key => {

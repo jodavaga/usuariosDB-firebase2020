@@ -11,6 +11,7 @@ import { UsuarioModel } from '../../models/usuario.model';
 export class UsuariosComponent implements OnInit {
 
   users: UsuarioModel[] = [];
+  loading = true;
 
   constructor( private userService: UsuariosService) { }
 
@@ -18,6 +19,7 @@ export class UsuariosComponent implements OnInit {
     this.userService.getUsuarios().subscribe( users => {
       console.log(users);
       this.users = users;
+      this.loading = false;
     });
   }
 
