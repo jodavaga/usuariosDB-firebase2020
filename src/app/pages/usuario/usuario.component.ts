@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuariosService } from '../../services/usuarios.service';
 import { UsuarioModel } from '../../models/usuario.model';
 
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-usuario',
@@ -12,12 +13,14 @@ import { Observable } from 'rxjs';
     styleUrls: ['./usuario.component.scss']
 })
 
-export class UsuarioComponent {
+export class UsuarioComponent implements OnInit {
 
     dataForm: FormGroup;
     usuario: UsuarioModel = new UsuarioModel();
 
-    constructor( private userService: UsuariosService ) {
+    constructor( private userService: UsuariosService,
+                 private route: ActivatedRoute
+                ) {
 
         // Form data
         this.dataForm = new FormGroup({
@@ -26,6 +29,22 @@ export class UsuarioComponent {
             ocupation: new FormControl('', Validators.required),
             employed: new FormControl(true, Validators.required)
         });
+    }
+
+    ngOnInit() {
+      // get PARAMS from url
+      const id = this.route.snapshot.params.id;
+
+      if (id !== 'nuevo') {
+          this.userService.getUser(id).subscribe((resp: UsuarioModel) => {
+              this.usuario = resp;
+              this.usuario.id = id;
+              // set form values from the user info
+              this.dataForm.setValue({
+                  ...this.usuario
+              });
+          });
+      }
     }
 
     saveForm() {

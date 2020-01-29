@@ -23,6 +23,10 @@ export class UsuariosService {
     );
   }
 
+  getUser( id: string ) {
+    return this.http.get(`${ this.url }/usuarios/${ id }.json`);
+  }
+
   createUser( user: UsuarioModel): Observable<UsuarioModel> {
     return this.http.post(`${this.url}/usuarios.json`, user).pipe(
       map( (resp: any) => {
