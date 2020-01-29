@@ -6,7 +6,7 @@
             class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
 </div>
 
-<div class="row m-t-3" *ngIf="loading">
+<div class="row m-t-30" *ngIf="loading">
   <div class="col text-center">
     <div class="alert alert-info" role="alert">
       <i class="fa fa-spinner fa-spin fa-2x"></i>
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="row m-t-3" *ngIf="users.length === 0 && !loading">
+<div class="row m-t-30" *ngIf="users.length === 0 && !loading">
   <div class="col text-center">
     <div class="alert alert-warning" role="alert">
       <i class="fa fa-exclamation-triangle fa-2x"></i>
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div class="row m-t-3 animated fadeIn slow" *ngIf="users.length > 0">
+<div class="row m-t-30 animated fadeIn slow" *ngIf="users.length > 0">
     <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -45,7 +45,11 @@
             <td>{{ user.name }}</td>
             <td>{{ user.ocupation }}</td>
             <td>{{ user.employed ? 'Employed' : 'Unemployed' }}</td>
-            <td>@mdo</td>
+            <td>
+              <button [routerLink]="['/usuario', user.id]"
+                      class="btn btn-primary m-r-5"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>
