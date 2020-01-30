@@ -33,7 +33,7 @@ export class UsuarioComponent implements OnInit {
 
     ngOnInit() {
       // get PARAMS from url
-      const id = this.route.snapshot.params.id;
+      const id = this.getRouteParam();
 
       if (id !== 'nuevo') {
           this.userService.getUser(id).subscribe((resp: UsuarioModel) => {
@@ -47,6 +47,11 @@ export class UsuarioComponent implements OnInit {
       }
     }
 
+    getRouteParam():string {
+        return this.route.snapshot.params.id;
+    }
+
+    // Save form data, edition mode or creating new user
     saveForm() {
         if (this.dataForm.invalid) {
             console.log('Forma NO valida');
@@ -83,6 +88,13 @@ export class UsuarioComponent implements OnInit {
                 title: resp.name,
                 text: 'Saved correctly',
                 icon: 'success'
+            }).then(resp => {
+                const routeParam = this.getRouteParam();
+
+                if (resp && routeParam === 'nuevo') {
+                    this.dataForm.reset();
+                    this.usuario = new UsuarioModel();
+                }
             });
         });
 
