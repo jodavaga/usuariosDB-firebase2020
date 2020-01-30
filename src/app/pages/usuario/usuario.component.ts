@@ -5,7 +5,7 @@ import { UsuarioModel } from '../../models/usuario.model';
 
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-usuario',
@@ -19,7 +19,8 @@ export class UsuarioComponent implements OnInit {
     usuario: UsuarioModel = new UsuarioModel();
 
     constructor( private userService: UsuariosService,
-                 private route: ActivatedRoute
+                 private route: ActivatedRoute,
+                 private navigation: Router
                 ) {
 
         // Form data
@@ -94,6 +95,8 @@ export class UsuarioComponent implements OnInit {
                 if (resp && routeParam === 'nuevo') {
                     this.dataForm.reset();
                     this.usuario = new UsuarioModel();
+                } else if (resp && routeParam !== 'nuevo') {
+                    this.navigation.navigate(['/usuarios']);
                 }
             });
         });
