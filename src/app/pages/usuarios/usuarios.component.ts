@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioModel } from '../../models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -23,10 +25,21 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  deleteUser( userId: string, index: number ) {
-    this.userService.deleteUser( userId ).subscribe(resp => {
-      this.users.splice(index, 1);
+  deleteUser( user: UsuarioModel, index: number ) {
+
+    Swal.fire({
+      title: 'Eliminar',
+      html: `¿Seguro desea eliminar usario: <strong>${ user.name } </strong>?`,
+      icon: 'question',
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then(response => {
+      if ( response.value ) {
+        this.userService.deleteUser( user ).subscribe();
+        this.users.splice(index, 1);
+      }
     });
+
   }
 
 }

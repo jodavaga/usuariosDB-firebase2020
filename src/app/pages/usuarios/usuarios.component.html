@@ -48,7 +48,7 @@
             <td>
               <button [routerLink]="['/usuario', user.id]"
                       class="btn btn-primary m-r-5"><i class="fa fa-edit"></i></button>
-              <button (click)="deleteUser(user.id, i)"
+              <button (click)="deleteUser(user, i)"
                       class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </td>
           </tr>
