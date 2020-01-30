@@ -44,7 +44,7 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ user.name }}</td>
             <td>{{ user.ocupation }}</td>
-            <td>{{ user.employed ? 'Employed' : 'Unemployed' }}</td>
+            <td><span class="badge" [ngClass]="{'badge-success': user.employed, 'badge-danger': !user.employed }">{{ user.employed ? 'Employed' : 'Unemployed' }}</span></td>
             <td>
               <button [routerLink]="['/usuario', user.id]"
                       class="btn btn-primary m-r-5"><i class="fa fa-edit"></i></button>
