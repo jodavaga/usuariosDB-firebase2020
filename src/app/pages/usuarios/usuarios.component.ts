@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
-import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UsuarioModel } from '../../models/usuario.model';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -21,6 +20,12 @@ export class UsuariosComponent implements OnInit {
       console.log(users);
       this.users = users;
       this.loading = false;
+    });
+  }
+
+  deleteUser( userId: string, index: number ) {
+    this.userService.deleteUser( userId ).subscribe(resp => {
+      this.users.splice(index, 1);
     });
   }
 

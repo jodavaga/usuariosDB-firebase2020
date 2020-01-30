@@ -48,6 +48,13 @@ export class UsuariosService {
     return this.http.put(`${this.url}/usuarios/${user.id}.json`, userTemp);
   }
 
+  deleteUser( id: string ) {
+    return this.http.delete(`${this.url}/usuarios/${id}.json`);
+  }
+
+  // ==========
+  // Utilities
+  // ==========
   private convertToArray( usuariosObj: object) {
 
     let usuarios: UsuarioModel[] = [];
