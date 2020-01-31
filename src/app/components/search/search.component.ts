@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { UsuarioModel } from '../../models/usuario.model';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-search',

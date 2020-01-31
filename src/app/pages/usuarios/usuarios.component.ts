@@ -4,7 +4,6 @@ import { UsuarioModel } from '../../models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 import Swal from 'sweetalert2';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-usuarios',
