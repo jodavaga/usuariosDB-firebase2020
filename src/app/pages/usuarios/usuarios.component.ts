@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { UsuarioModel } from '../../models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 import Swal from 'sweetalert2';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,7 +20,6 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsuarios().subscribe( users => {
-      console.log(users);
       this.users = users;
       this.loading = false;
     });
@@ -35,11 +35,15 @@ export class UsuariosComponent implements OnInit {
       showCancelButton: true
     }).then(response => {
       if ( response.value ) {
+        console.log('delete:', user);
         this.userService.deleteUser( user ).subscribe();
         this.users.splice(index, 1);
       }
     });
+  }
 
+  getFoundUsers( users: UsuarioModel[]) {
+    this.users = users;
   }
 
 }

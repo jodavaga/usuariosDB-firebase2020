@@ -1,9 +1,14 @@
 <h1>Usuarios</h1>
 <hr>
 
-<div class="row justify-content-end">
-    <button routerLink="/usuario/nuevo"
-            class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+<div class="row">
+    <div class="col-sm-7">
+      <app-search (usersFound)="getFoundUsers( $event )"></app-search>
+    </div>
+    <div class="col-sm-5 text-right">
+      <button routerLink="/usuario/nuevo"
+              class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+    </div>
 </div>
 
 <div class="row m-t-30" *ngIf="loading">

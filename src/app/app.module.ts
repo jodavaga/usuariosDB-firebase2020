@@ -11,13 +11,15 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { StatusComponent } from './components/status/status.component';
 import { UsuariosService } from './services/usuarios.service';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuariosComponent,
     UsuarioComponent,
-    StatusComponent
+    StatusComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
