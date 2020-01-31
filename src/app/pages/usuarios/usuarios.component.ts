@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { UsuarioModel } from '../../models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -34,7 +34,6 @@ export class UsuariosComponent implements OnInit {
       showCancelButton: true
     }).then(response => {
       if ( response.value ) {
-        console.log('delete:', user);
         this.userService.deleteUser( user ).subscribe();
         this.users.splice(index, 1);
       }

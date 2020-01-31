@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { UsuarioModel } from '../../models/usuario.model';
 
@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
       termino = termino.toLowerCase();
       const nameTmp = element.name.toLowerCase();
       const ocupationTmp = element.ocupation.toLowerCase();
-      if ( nameTmp === termino || ocupationTmp === termino) {
+      if ( nameTmp.includes(termino) || ocupationTmp.includes(termino)) {
         this.usersMatch.push(element);
       }
     });

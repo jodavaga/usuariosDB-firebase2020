@@ -28,7 +28,7 @@ export class UsuarioComponent implements OnInit {
             id: new FormControl(),
             name: new FormControl('', Validators.required),
             ocupation: new FormControl('', Validators.required),
-            employed: new FormControl(true, Validators.required)
+            employed: new FormControl(true)
         });
     }
 
@@ -89,12 +89,13 @@ export class UsuarioComponent implements OnInit {
                 title: resp.name,
                 text: 'Saved correctly',
                 icon: 'success'
-            }).then(resp => {
+            }).then( resp => {
                 const routeParam = this.getRouteParam();
 
                 if (resp && routeParam === 'nuevo') {
                     this.dataForm.reset();
                     this.usuario = new UsuarioModel();
+                    // Navigate to usuarios due to edition succesfull
                 } else if (resp && routeParam !== 'nuevo') {
                     this.navigation.navigate(['/usuarios']);
                 }
