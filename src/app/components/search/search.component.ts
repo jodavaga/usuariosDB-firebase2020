@@ -29,6 +29,7 @@ export class SearchComponent implements OnInit {
   findUsers( termino: string) {
     this.usersMatch = [];
     this.users.filter(element => {
+      termino = termino.toLowerCase();
       const nameTmp = element.name.toLowerCase();
       const ocupationTmp = element.ocupation.toLowerCase();
       if ( nameTmp === termino || ocupationTmp === termino) {

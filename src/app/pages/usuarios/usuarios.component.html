@@ -1,11 +1,11 @@
-<h1>Usuarios</h1>
+<h1 class="col">Usuarios</h1>
 <hr>
 
 <div class="row">
-    <div class="col-sm-7">
+    <div class="col-12 col-sm-7 col-md-7">
       <app-search (usersFound)="getFoundUsers( $event )"></app-search>
     </div>
-    <div class="col-sm-5 text-right">
+    <div class="col-12 col-sm-5 col-md-5 text-right">
       <button routerLink="/usuario/nuevo"
               class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
     </div>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="row m-t-30 animated fadeIn slow" *ngIf="users.length > 0">
-    <table class="table">
+    <table class="table col">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
